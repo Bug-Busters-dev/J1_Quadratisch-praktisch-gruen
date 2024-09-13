@@ -39,7 +39,7 @@ public class QuadratischPraktischGruen {
         float kleingartenLängex = sinfollsterKleinstegemeinsamerTeilerGrundstück;
         float kleingartenLängey = sinfollsterKleinstegemeinsamerTeilerGrundstück;
 
-        while(kleingartenLängex != kleingartenLängey || anzahlInteresentenUpper - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) < 0 || anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0){
+        while( anzahlInteresentenUpper - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) < 0 || anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0){
             if (anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0){
                 if ( kleingartenLängex > kleingartenLängey || grundstückx > grundstücky){
                     kleingartenLängex = kleingartenLängex - kleingartenLängex/(grundstückx/kleingartenLängex);
@@ -48,5 +48,10 @@ public class QuadratischPraktischGruen {
                 }
             }
         }
+
+        System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +" und eine Länge von " + kleingartenLängey + ".")
+        System.out.println("Dies sorgt für eine Abweichung der Kanten vom perfekten Quadrat von:" + kleingartenLängex - kleingartenLängey)
+        System.out.println("Insgesamt gibt es " + (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey) + " Kleingärten.")
+        System.out.println("Dies sind " + (anzahlInteresenten - (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) + " mehr als es Intressenten gibt. ( " + ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)/(anzahlInteresenten/100)) + " Prozent mehr.)")
     }
 }
