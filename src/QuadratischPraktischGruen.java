@@ -39,9 +39,14 @@ public class QuadratischPraktischGruen {
         float kleingartenLängex = sinfollsterKleinstegemeinsamerTeilerGrundstück;
         float kleingartenLängey = sinfollsterKleinstegemeinsamerTeilerGrundstück;
 
-
-        while(kleingartenLängex != kleingartenLängey || anzahlInteresentenUpper - ((grundstückx/sinfollsterKleinstegemeinsamerTeilerGrundstück)*(grundstücky/sinfollsterKleinstegemeinsamerTeilerGrundstück)) < 0 || anzahlInteresenten - ((grundstückx/sinfollsterKleinstegemeinsamerTeilerGrundstück)*(grundstücky/sinfollsterKleinstegemeinsamerTeilerGrundstück)) > 0){
-            
+        while(kleingartenLängex != kleingartenLängey || anzahlInteresentenUpper - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) < 0 || anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0){
+            if (anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0){
+                if ( kleingartenLängex > kleingartenLängey || grundstückx > grundstücky){
+                    kleingartenLängex = kleingartenLängex - kleingartenLängex/(grundstückx/kleingartenLängex);
+                }else if ( kleingartenLängex < kleingartenLängey || grundstückx < grundstücky) {
+                    kleingartenLängey = kleingartenLängey - kleingartenLängey/(grundstücky/kleingartenLängey);
+                }
+            }
         }
     }
 }
