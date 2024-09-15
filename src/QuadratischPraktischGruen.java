@@ -6,12 +6,12 @@ public class QuadratischPraktischGruen {
         int grundstückx;
 
         String file = "C:\\Users\\Jonathan salomo\\Documents\\Programiren\\Informatik Wettbewerb\\BWINF 2024\\Runde 1\\Quadratisch-praktisch-gruen\\data\\garten0.txt";
-        FileReaderx fileReaderx = new FileReaderx;
+        FileReaderx fileReaderx = new FileReaderx();
         
 
-        anzahlInteresenten = fileReaderx.readLine(file; 1);
-        grundstückx = fileReaderx.readLine(file; 2);
-        grundstücky = fileReaderx.readLine(file; 3);
+        anzahlInteresenten = fileReaderx.readLine(file, 1);
+        grundstückx = fileReaderx.readLine(file, 2);
+        grundstücky = fileReaderx.readLine(file, 3);
 
         System.out.println(anzahlInteresenten);
         System.out.println(grundstückx);
@@ -19,11 +19,10 @@ public class QuadratischPraktischGruen {
 
         float anzahlInteresentenUpper = anzahlInteresenten + (anzahlInteresenten/100)*10;
 
-        EuklidischerAlgorithmus euklidischerAlgorithmus = new EuklidischerAlgorithmus;
-        int[] kleinstegemeinsameTeilerGrundstück = euklidischerAlgorithmus.euklidischerAlgorithmus(grundstückx, grundstücky);
+        EuklidischerAlgorithmus euklidischerAlgorithmus = new EuklidischerAlgorithmus();
+        int[] kleinstegemeinsameTeilerGrundstück = euklidischerAlgorithmus.gemeinsameTeilerFinden(grundstückx, grundstücky);
         
-
-        int sinfollsterKleinstegemeinsamerTeilerGrundstück;
+        int sinfollsterKleinstegemeinsamerTeilerGrundstück = 0;
         
         for(int i = 0; i > kleinstegemeinsameTeilerGrundstück.length-1; i++){
 
@@ -49,9 +48,9 @@ public class QuadratischPraktischGruen {
             }
         }
 
-        System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +" und eine Länge von " + kleingartenLängey + ".")
-        System.out.println("Dies sorgt für eine Abweichung der Kanten vom perfekten Quadrat von:" + kleingartenLängex - kleingartenLängey)
-        System.out.println("Insgesamt gibt es " + (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey) + " Kleingärten.")
-        System.out.println("Dies sind " + (anzahlInteresenten - (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) + " mehr als es Intressenten gibt. ( " + ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)/(anzahlInteresenten/100)) + " Prozent mehr.)")
+        System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +" und eine Länge von " + kleingartenLängey + ".");
+        System.out.println("Dies sorgt für eine Abweichung der Kanten vom perfekten Quadrat von:" + (kleingartenLängex - kleingartenLängey));
+        System.out.println("Insgesamt gibt es " + (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey) + " Kleingärten.");
+        System.out.println("Dies sind " + (anzahlInteresenten - (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) + " mehr als es Intressenten gibt. ( " + ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)/(anzahlInteresenten/100)) + " Prozent mehr.)");
     }
 }
