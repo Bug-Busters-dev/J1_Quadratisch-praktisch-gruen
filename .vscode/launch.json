@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "KleingartenVisualisierung",
+            "request": "launch",
+            "mainClass": "KleingartenVisualisierung",
+            "projectName": "Quadratisch, praktisch, grün_6928ef12"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "QuadratischPraktischGruen",
+            "request": "launch",
+            "mainClass": "QuadratischPraktischGruen",
+            "projectName": "Quadratisch, praktisch, grün_6928ef12"
+        }
+    ]
+}
