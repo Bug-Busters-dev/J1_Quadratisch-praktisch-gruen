@@ -7,7 +7,7 @@ public class QuadratischPraktischGruen {
         int grundstücky;
         int grundstückx;
 
-        String file = "data\\garten4.txt";
+        String file = "data\\garten5.txt";
         FileReaderx fileReaderx = new FileReaderx();
         
 
@@ -63,8 +63,6 @@ public class QuadratischPraktischGruen {
                 System.out.println("Insgesamt gibt es " + (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey) + " Kleingärten.");
                 System.out.println("Dies sind " + (((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey))- anzahlInteresenten) + " mehr als es Intressenten gibt.(" + (((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)/(anzahlInteresenten/100.0f))-100) + " Prozent)");
             }
-
-
             
             if (anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0) {
                 if (kleingartenLängex >= kleingartenLängey && lastStep != 4 && xStep != 1|| lastStep == 3) {
@@ -72,6 +70,14 @@ public class QuadratischPraktischGruen {
                     lastStep = 1;
                     xStep = -1;
                 } else if (kleingartenLängex <= kleingartenLängey && lastStep != 3 && yStep != 1|| lastStep == 4) {
+                    kleingartenLängey = kleingartenLängey - (kleingartenLängey/((grundstücky/kleingartenLängey)+1));
+                    lastStep = 2;
+                    yStep = -1;
+                } else if (grundstückx/kleingartenLängex > grundstücky/kleingartenLängey){
+                    kleingartenLängex = kleingartenLängex - (kleingartenLängex/((grundstückx/kleingartenLängex)+1));
+                    lastStep = 1;
+                    xStep = -1;
+                } else if (grundstückx/kleingartenLängex < grundstücky/kleingartenLängey){
                     kleingartenLängey = kleingartenLängey - (kleingartenLängey/((grundstücky/kleingartenLängey)+1));
                     lastStep = 2;
                     yStep = -1;
@@ -85,6 +91,14 @@ public class QuadratischPraktischGruen {
                     kleingartenLängex = kleingartenLängex + (kleingartenLängex/((grundstückx/kleingartenLängex)-1));
                     lastStep = 4;
                     xStep = 1;
+                } else if (grundstückx/kleingartenLängex > grundstücky/kleingartenLängey){
+                    kleingartenLängex = kleingartenLängex + (kleingartenLängex/((grundstückx/kleingartenLängex)-1));
+                    lastStep = 4;
+                    xStep = 1;
+                } else if (grundstückx/kleingartenLängex < grundstücky/kleingartenLängey){
+                    kleingartenLängey = kleingartenLängey + (kleingartenLängey/((grundstücky/kleingartenLängey)-1));
+                    lastStep = 3;
+                    yStep = 1;
                 }
             }
 
