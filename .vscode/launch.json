@@ -4,13 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "type": "java",
-            "name": "KleingartenVisualisierung",
-            "request": "launch",
-            "mainClass": "KleingartenVisualisierung",
-            "projectName": "Quadratisch, praktisch, grün_6928ef12"
-        },
+        
         {
             "type": "java",
             "name": "Current File",
@@ -22,7 +16,8 @@
             "name": "QuadratischPraktischGruen",
             "request": "launch",
             "mainClass": "QuadratischPraktischGruen",
-            "projectName": "Quadratisch, praktisch, grün_6928ef12"
+            "projectName": "Quadratisch, praktisch, grün_6928ef12",
+            "cwd": "${workspaceFolder}"
         }
     ]
 }

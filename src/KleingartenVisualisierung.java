@@ -7,9 +7,11 @@ public class KleingartenVisualisierung extends JPanel {
     private int grundstueckY;  // Grundstückshöhe
     private float kleingartenLängeX;  // Breite eines Kleingartens
     private float kleingartenLängeY;  // Höhe eines Kleingartens
-    private int anzahlInteressenten;  // Anzahl der Interessenten
     private int anzahlKleingaerten;   // Anzahl der berechneten Kleingärten
     private int differenzInteressenten;  // Differenz zwischen Kleingärten und Interessenten
+
+    // Mindestgröße für die Kleingärten, um sie sichtbar zu machen
+    private static final int MIN_KLEINGARTEN_GRÖSSE = 10;
 
     // Konstruktor, in dem die Daten übergeben werden
     public KleingartenVisualisierung(int grundstueckX, int grundstueckY, float kleingartenLängeX, float kleingartenLängeY, int anzahlInteressenten) {
@@ -17,16 +19,8 @@ public class KleingartenVisualisierung extends JPanel {
         this.grundstueckY = grundstueckY;
         this.kleingartenLängeX = kleingartenLängeX;
         this.kleingartenLängeY = kleingartenLängeY;
-        this.anzahlInteressenten = anzahlInteressenten;
         this.anzahlKleingaerten = (int) ((grundstueckX / kleingartenLängeX) * (grundstueckY / kleingartenLängeY));
         this.differenzInteressenten = anzahlKleingaerten - anzahlInteressenten;
-
-        JFrame frame = new JFrame();
-        frame.setTitle("Visualisierung der Kleingärten - Dark Mode mit Rändern");
-        frame.setSize(1000, 800);  // Größeres Fenster für bessere Darstellung
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(this);
-        frame.setVisible(true);
     }
 
     @Override
@@ -39,18 +33,28 @@ public class KleingartenVisualisierung extends JPanel {
         // Umwandlung von Graphics in Graphics2D für erweiterte Funktionen
         Graphics2D g2d = (Graphics2D) g;
 
-        // Skalierungsfaktor an Fenstergröße anpassen, sodass alles sichtbar bleibt
+        // Scrollbare Panel-Größe abhängig von Grundstücksgröße
+        int panelWidth = Math.max(grundstueckX + 100, getWidth());  // Grundstueck + Puffer
+        int panelHeight = Math.max(grundstueckY + 100, getHeight());
+        setPreferredSize(new Dimension(panelWidth, panelHeight));
+
+        // Berechnen des Skalierungsfaktors, um sicherzustellen, dass auch große Grundstücke sichtbar sind
         int padding = 50;  // Abstand vom Rand
         int availableWidth = getWidth() - 2 * padding;
         int availableHeight = getHeight() - 2 * padding - 200;  // Raum für Texte unten
-        int scaleFactor = Math.min(availableWidth / grundstueckX, availableHeight / grundstueckY);
+        double scaleFactor = Math.min((double) availableWidth / grundstueckX, (double) availableHeight / grundstueckY);
+
+        // Mindestskalierung für die Kleingärten, damit sie immer sichtbar sind
+        if (scaleFactor * kleingartenLängeX < MIN_KLEINGARTEN_GRÖSSE || scaleFactor * kleingartenLängeY < MIN_KLEINGARTEN_GRÖSSE) {
+            scaleFactor = Math.max((double) MIN_KLEINGARTEN_GRÖSSE / kleingartenLängeX, (double) MIN_KLEINGARTEN_GRÖSSE / kleingartenLängeY);
+        }
 
         // Grundstück zeichnen (inklusive Rändern)
         g2d.setColor(new Color(70, 70, 70));  // Dunkleres Grau für das Grundstück
         int startX = padding;
         int startY = padding;
-        int scaledWidth = grundstueckX * scaleFactor;
-        int scaledHeight = grundstueckY * scaleFactor;
+        int scaledWidth = (int) (grundstueckX * scaleFactor);
+        int scaledHeight = (int) (grundstueckY * scaleFactor);
         g2d.fillRect(startX, startY, scaledWidth, scaledHeight);  // Maßstab anpassen
 
         // Rahmen um das Grundstück zeichnen
@@ -62,10 +66,16 @@ public class KleingartenVisualisierung extends JPanel {
         g2d.setColor(new Color(255, 105, 180));  // Helles Pink für das Raster
         for (int i = 0; i < grundstueckX / kleingartenLängeX; i++) {
             for (int j = 0; j < grundstueckY / kleingartenLängeY; j++) {
-                g2d.drawRect(startX + (int) (i * kleingartenLängeX * scaleFactor),
-                             startY + (int) (j * kleingartenLängeY * scaleFactor),
-                             (int) (kleingartenLängeX * scaleFactor),
-                             (int) (kleingartenLängeY * scaleFactor));  // Kleingarten-Rechtecke zeichnen
+                int rectX = startX + (int) (i * kleingartenLängeX * scaleFactor);
+                int rectY = startY + (int) (j * kleingartenLängeY * scaleFactor);
+                int rectWidth = (int) (kleingartenLängeX * scaleFactor);
+                int rectHeight = (int) (kleingartenLängeY * scaleFactor);
+
+                // Mindestgröße für die Kleingärten sicherstellen
+                rectWidth = Math.max(rectWidth, MIN_KLEINGARTEN_GRÖSSE);
+                rectHeight = Math.max(rectHeight, MIN_KLEINGARTEN_GRÖSSE);
+
+                g2d.drawRect(rectX, rectY, rectWidth, rectHeight);  // Kleingarten-Rechtecke zeichnen
             }
         }
 
