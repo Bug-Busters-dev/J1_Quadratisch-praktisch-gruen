@@ -1,5 +1,3 @@
-
-import javax.swing.*;
 public class QuadratischPraktischGruen {
     public static void main(String[] args) throws Exception {
         
@@ -10,7 +8,6 @@ public class QuadratischPraktischGruen {
         String file = "data\\garten5.txt";
         FileReaderx fileReaderx = new FileReaderx();
         
-
         anzahlInteresenten = fileReaderx.readLine(file, 1);
         grundstückx = fileReaderx.readLine(file, 2);
         grundstücky = fileReaderx.readLine(file, 3);
@@ -21,9 +18,6 @@ public class QuadratischPraktischGruen {
         int[] kleinstegemeinsameTeilerGrundstück = euklidischerAlgorithmus.gemeinsameTeilerFinden(grundstückx, grundstücky);
         
         int sinfollsterKleinstegemeinsamerTeilerGrundstück = 0;
-
-        Printer printer = new Printer();
-        printer.outArray1int(kleinstegemeinsameTeilerGrundstück);
         
         for(int i = 0; i < kleinstegemeinsameTeilerGrundstück.length; i++){
             try {
@@ -35,7 +29,9 @@ public class QuadratischPraktischGruen {
             }
         }
 
-        System.out.println(sinfollsterKleinstegemeinsamerTeilerGrundstück);
+        System.err.println("---------------------------------------------------Start---------------------------------------------------");
+
+        System.out.println("gewählter gemeinsamer Teiler: " + sinfollsterKleinstegemeinsamerTeilerGrundstück);
 
         float kleingartenLängex = sinfollsterKleinstegemeinsamerTeilerGrundstück;
         float kleingartenLängey = sinfollsterKleinstegemeinsamerTeilerGrundstück;
@@ -48,21 +44,11 @@ public class QuadratischPraktischGruen {
         System.out.println("Interesenten: "+anzahlInteresenten);
         System.out.println("Interesenten_upper: "+anzahlInteresentenUpper);
 
-        int maxIterations = 10010;
-        int iterationCount = 0;
-
         int lastStep = 0;
         int xStep = 0;
         int yStep = 0;
 
-        while((anzahlInteresentenUpper - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) < 0 && iterationCount < maxIterations || anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0) && iterationCount < maxIterations) {
-            
-            if (iterationCount > 10000){
-                System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +" und eine Länge von " + kleingartenLängey + ".");
-                System.out.println("Dies sorgt für eine Abweichung der Kanten vom perfekten Quadrat von:" + (kleingartenLängex - kleingartenLängey));
-                System.out.println("Insgesamt gibt es " + (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey) + " Kleingärten.");
-                System.out.println("Dies sind " + (((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey))- anzahlInteresenten) + " mehr als es Intressenten gibt.(" + (((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)/(anzahlInteresenten/100.0f))-100) + " Prozent)");
-            }
+        while((anzahlInteresentenUpper - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) < 0 || anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0)) {
             
             if (anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0) {
                 if (kleingartenLängex >= kleingartenLängey && lastStep != 4 && xStep != 1|| lastStep == 3) {
@@ -101,11 +87,10 @@ public class QuadratischPraktischGruen {
                     yStep = 1;
                 }
             }
-
-            iterationCount++;  // Zähler erhöhen
         }
 
-        System.err.println(iterationCount);
+        System.err.println("-----------------------------------------------------------------------------------------------------------");
+
         System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +" und eine Länge von " + kleingartenLängey + ".");
         System.out.println("Dies sorgt für eine Abweichung der Kanten vom perfekten Quadrat von:" + (kleingartenLängex - kleingartenLängey));
         System.out.println("Insgesamt gibt es " + (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey) + " Kleingärten.");
@@ -113,8 +98,7 @@ public class QuadratischPraktischGruen {
         
         kontröler(grundstückx, grundstücky, kleingartenLängex, kleingartenLängey);
 
-        vis(grundstückx, grundstücky, kleingartenLängex, kleingartenLängey, anzahlInteresenten);
-
+        System.err.println("----------------------------------------------------End----------------------------------------------------");
     }
 
     private static void kontröler(int grundstückx, int grundstücky, float kleingartenLängex, float kleingartenLängey){ 
@@ -124,26 +108,5 @@ public class QuadratischPraktischGruen {
             if ((grundstücky/kleingartenLängey) - (int) (grundstücky/kleingartenLängey) > 0.0009){
                 System.err.println("Die Aufteilung der y Achse ist um " + ((grundstücky/kleingartenLängey) - (int) (grundstücky/kleingartenLängey)) + " ungenau.");
             }
-    }
-
-    private static void vis(int grundstueckX, int grundstueckY, float kleingartenLängeX, float kleingartenLängeY, int anzahlInteressenten){
-
-        JFrame frame = new JFrame("Kleingarten Visualisierung");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Erstelle die Visualisierungskomponente
-        KleingartenVisualisierung visualisierung = new KleingartenVisualisierung( grundstueckX,  grundstueckY,  kleingartenLängeX,  kleingartenLängeY,  anzahlInteressenten);
-
-        // ScrollPane hinzufügen
-        JScrollPane scrollPane = new JScrollPane(visualisierung);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-        // ScrollPane dem Frame hinzufügen
-        frame.add(scrollPane);
-
-        // Größe des Frames festlegen und sichtbar machen
-        frame.setSize(800, 600);  // Frame-Größe anpassen
-        frame.setVisible(true);
     }
 }
