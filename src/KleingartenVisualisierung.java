@@ -5,8 +5,8 @@ public class KleingartenVisualisierung extends JPanel {
 
     private int grundstueckX;  // Grundstücksbreite
     private int grundstueckY;  // Grundstückshöhe
-    private float kleingartenLängeX;  // Breite eines Kleingartens
-    private float kleingartenLängeY;  // Höhe eines Kleingartens
+    private double kleingartenLängeX;  // Breite eines Kleingartens
+    private double kleingartenLängeY;  // Höhe eines Kleingartens
     private int anzahlKleingaerten;   // Anzahl der berechneten Kleingärten
     private int differenzInteressenten;  // Differenz zwischen Kleingärten und Interessenten
 
@@ -14,7 +14,7 @@ public class KleingartenVisualisierung extends JPanel {
     private static final int MIN_KLEINGARTEN_GRÖSSE = 10;
 
     // Konstruktor, in dem die Daten übergeben werden
-    public KleingartenVisualisierung(int grundstueckX, int grundstueckY, float kleingartenLängeX, float kleingartenLängeY, int anzahlInteressenten) {
+    public KleingartenVisualisierung(int grundstueckX, int grundstueckY, double kleingartenLängeX, double kleingartenLängeY, int anzahlInteressenten) {
         this.grundstueckX = grundstueckX;
         this.grundstueckY = grundstueckY;
         this.kleingartenLängeX = kleingartenLängeX;

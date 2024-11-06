@@ -7,7 +7,7 @@ public class QuadratischPraktischGruen {
         int grundstücky;
         int grundstückx;
 
-        String file = "data\\garten1.txt";
+        String file = "data\\garten5.txt";
         FileReaderx fileReaderx = new FileReaderx();
         
 
@@ -37,8 +37,8 @@ public class QuadratischPraktischGruen {
 
         System.out.println(sinfollsterKleinstegemeinsamerTeilerGrundstück);
 
-        float kleingartenLängex = sinfollsterKleinstegemeinsamerTeilerGrundstück;
-        float kleingartenLängey = sinfollsterKleinstegemeinsamerTeilerGrundstück;
+        double kleingartenLängex = sinfollsterKleinstegemeinsamerTeilerGrundstück;
+        double kleingartenLängey = sinfollsterKleinstegemeinsamerTeilerGrundstück;
 
         System.out.println("grundstückx: " + grundstückx);
         System.out.println("grundstücky: " +grundstücky);
@@ -51,9 +51,11 @@ public class QuadratischPraktischGruen {
         int lastStep = 0;
         int xStep = 0;
         int yStep = 0;
+        double kleingährten = (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey);
 
         while((anzahlInteresentenUpper - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) < 0 || anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0)) {
             
+
             if (anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0) {
                 if (kleingartenLängex >= kleingartenLängey && lastStep != 4 && xStep != 1|| lastStep == 3) {
                     kleingartenLängex = kleingartenLängex - (kleingartenLängex/((grundstückx/kleingartenLängex)+1));
@@ -91,6 +93,7 @@ public class QuadratischPraktischGruen {
                     yStep = 1;
                 }
             }
+            kleingährten = (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey);
         }
 
         System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +" und eine Länge von " + kleingartenLängey + ".");
@@ -104,7 +107,7 @@ public class QuadratischPraktischGruen {
 
     }
 
-    private static void kontröler(int grundstückx, int grundstücky, float kleingartenLängex, float kleingartenLängey){ 
+    private static void kontröler(int grundstückx, int grundstücky, double kleingartenLängex, double kleingartenLängey){ 
         	if ((grundstückx/kleingartenLängex) - (int) (grundstückx/kleingartenLängex) > 0.0009){
                 System.err.println("Die Aufteilung der x Achse ist um " + ((grundstückx/kleingartenLängex) - (int) (grundstückx/kleingartenLängex)) + " ungenau.");
             } 
@@ -113,13 +116,13 @@ public class QuadratischPraktischGruen {
             }
     }
 
-    private static void vis(int grundstueckX, int grundstueckY, float kleingartenLängeX, float kleingartenLängeY, int anzahlInteressenten){
+    private static void vis(int grundstueckX, int grundstueckY, double kleingartenLängeX, double kleingartenLängeY, int anzahlInteressenten){
 
         JFrame frame = new JFrame("Kleingarten Visualisierung");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Erstelle die Visualisierungskomponente
-        KleingartenVisualisierung visualisierung = new KleingartenVisualisierung( grundstueckX,  grundstueckY,  kleingartenLängeX,  kleingartenLängeY,  anzahlInteressenten);
+        KleingartenVisualisierung visualisierung = new KleingartenVisualisierung(grundstueckX,  grundstueckY,  kleingartenLängeX,  kleingartenLängeY,  anzahlInteressenten);
 
         // ScrollPane hinzufügen
         JScrollPane scrollPane = new JScrollPane(visualisierung);
