@@ -1,5 +1,3 @@
-
-import javax.swing.*;
 public class QuadratischPraktischGruen {
     public static void main(String[] args) throws Exception {
         
@@ -21,9 +19,6 @@ public class QuadratischPraktischGruen {
         int[] kleinstegemeinsameTeilerGrundstück = euklidischerAlgorithmus.gemeinsameTeilerFinden(grundstückx, grundstücky);
         
         int sinfollsterKleinstegemeinsamerTeilerGrundstück = 0;
-
-        Printer printer = new Printer();
-        printer.outArray1int(kleinstegemeinsameTeilerGrundstück);
         
         for(int i = 0; i < kleinstegemeinsameTeilerGrundstück.length; i++){
             try {
@@ -35,8 +30,6 @@ public class QuadratischPraktischGruen {
             }
         }
 
-        System.out.println(sinfollsterKleinstegemeinsamerTeilerGrundstück);
-
         double kleingartenLängex = sinfollsterKleinstegemeinsamerTeilerGrundstück;
         double kleingartenLängey = sinfollsterKleinstegemeinsamerTeilerGrundstück;
 
@@ -44,9 +37,9 @@ public class QuadratischPraktischGruen {
 
         System.out.println("grundstückx: " + grundstückx +"m");
         System.out.println("grundstücky: " +grundstücky +"m");
-        System.out.println("kleingartenLängex: "+kleingartenLängex +"m");
-        System.out.println("kleingartenLängey: "+kleingartenLängey +"m");
-        System.out.println("Gärten: "+((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)));
+        System.out.println("kleingartenLängex (vor der weiteren Anpassung): "+kleingartenLängex +"m");
+        System.out.println("kleingartenLängey (vor der weiteren Anpassung): "+kleingartenLängey +"m");
+        System.out.println("Gärten (basierend auf den Längen vor der weiteren Anpassung): "+((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)));
         System.out.println("Interesenten: "+anzahlInteresenten);
         System.out.println("Interesenten_upper: "+anzahlInteresentenUpper);
 
@@ -55,7 +48,6 @@ public class QuadratischPraktischGruen {
         int lastStep = 0;
         int xStep = 0;
         int yStep = 0;
-        double kleingährten = (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey);
 
         while((anzahlInteresentenUpper - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) < 0 || anzahlInteresenten - ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) > 0)) {
             
@@ -97,7 +89,6 @@ public class QuadratischPraktischGruen {
                     yStep = 1;
                 }
             }
-            kleingährten = (grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey);
         }
 
         System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +"m und eine Länge von " + kleingartenLängey + "m.");
@@ -108,9 +99,6 @@ public class QuadratischPraktischGruen {
         System.out.println("--------------------------------------------------------------------------------------------------------------------");
 
         kontröler(grundstückx, grundstücky, kleingartenLängex, kleingartenLängey);
-
-        vis(grundstückx, grundstücky, kleingartenLängex, kleingartenLängey, anzahlInteresenten);
-
     }
 
     private static double abweichung(double kleingartenLängex, double kleingartenLängey){
@@ -133,26 +121,5 @@ public class QuadratischPraktischGruen {
             if ((grundstücky/kleingartenLängey) - (int) (grundstücky/kleingartenLängey) > 0 || (grundstückx/kleingartenLängex) - (int) (grundstückx/kleingartenLängex) > 0){
                 System.out.println("--------------------------------------------------------------------------------------------------------------------");
             }
-    }
-
-    private static void vis(int grundstueckX, int grundstueckY, double kleingartenLängeX, double kleingartenLängeY, int anzahlInteressenten){
-
-        JFrame frame = new JFrame("Kleingarten Visualisierung");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Erstelle die Visualisierungskomponente
-        KleingartenVisualisierung visualisierung = new KleingartenVisualisierung(grundstueckX,  grundstueckY,  kleingartenLängeX,  kleingartenLängeY,  anzahlInteressenten);
-
-        // ScrollPane hinzufügen
-        JScrollPane scrollPane = new JScrollPane(visualisierung);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-        // ScrollPane dem Frame hinzufügen
-        frame.add(scrollPane);
-
-        // Größe des Frames festlegen und sichtbar machen
-        frame.setSize(800, 600);  // Frame-Größe anpassen
-        frame.setVisible(true);
     }
 }
