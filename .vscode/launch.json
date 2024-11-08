@@ -9,6 +9,13 @@
             "name": "QuadratischPraktischGruen",
             "request": "launch",
             "mainClass": "QuadratischPraktischGruen",
+            "projectName": "Quadratisch, praktisch, grün_ce9b0a8d"
+        },
+        {
+            "type": "java",
+            "name": "QuadratischPraktischGruen",
+            "request": "launch",
+            "mainClass": "QuadratischPraktischGruen",
             "projectName": "Quadratisch-praktisch-gruen_fc20ed52"
         },
         {
