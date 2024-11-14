@@ -5,7 +5,7 @@ public class QuadratischPraktischGruen {
         int grundstücky;
         int grundstückx;
 
-        String file = "data\\garten5.txt";
+        String file = "data\\garten0.txt";
         FileReaderx fileReaderx = new FileReaderx();
         
 
@@ -13,7 +13,7 @@ public class QuadratischPraktischGruen {
         grundstückx = fileReaderx.readLine(file, 2);
         grundstücky = fileReaderx.readLine(file, 3);
 
-        float anzahlInteresentenUpper = anzahlInteresenten + (anzahlInteresenten / 100.0f) * 10;
+        double anzahlInteresentenUpper = Math.floor(anzahlInteresenten + (anzahlInteresenten / 100.0f) * 10);
 
         EuklidischerAlgorithmus euklidischerAlgorithmus = new EuklidischerAlgorithmus();
         int[] kleinstegemeinsameTeilerGrundstück = euklidischerAlgorithmus.gemeinsameTeilerFinden(grundstückx, grundstücky);
