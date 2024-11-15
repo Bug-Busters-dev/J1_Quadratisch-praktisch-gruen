@@ -5,7 +5,7 @@ public class QuadratischPraktischGruen {
         int grundstücky;
         int grundstückx;
 
-        String file = "data\\garten0.txt";
+        String file = "data\\garten5.txt";
         FileReaderx fileReaderx = new FileReaderx();
         
 
@@ -94,7 +94,7 @@ public class QuadratischPraktischGruen {
         System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +"m und eine Länge von " + kleingartenLängey + "m.");
         System.out.println("Dies sorgt für eine Abweichung der Kanten vom perfekten Quadrat von: " + (kleingartenLängex - kleingartenLängey) + "m (" + abweichung(kleingartenLängex, kleingartenLängey) + " Prozent)");
         System.out.println("Insgesamt gibt es " + Math.floor((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) + " Kleingärten.");
-        System.out.println("Dies sind " + Math.floor((((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey))- anzahlInteresenten)) + " mehr als es Intressenten gibt.(" + String.format("%.5f", ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)/(anzahlInteresenten/100.0f))-100) + " Prozent)");
+        System.out.println("Dies sind " + Math.floor((((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey))- anzahlInteresenten)) + " mehr als es Interessenten gibt.(" + String.format("%.5f", ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)/(anzahlInteresenten/100.0f))-100) + " Prozent)");
         
         System.out.println("--------------------------------------------------------------------------------------------------------------------");
 
@@ -112,7 +112,7 @@ public class QuadratischPraktischGruen {
     private static void kontröler(int grundstückx, int grundstücky, double kleingartenLängex, double kleingartenLängey){ 
         	if ((grundstückx/kleingartenLängex) - (int) (grundstückx/kleingartenLängex) > 0){
                 System.err.println("Die Aufteilung der x Achse ist um " + String.format("%.20f", (((grundstückx / kleingartenLängex) - (int) (grundstückx / kleingartenLängex))*kleingartenLängex)) + "m ungenau.");
-                System.err.println("Es bleiben auf der X Achse also am Nach der Aufteilung der Kleingährten " + String.format("%.20f", (((grundstückx / kleingartenLängex) - (int) (grundstückx / kleingartenLängex))*kleingartenLängex)) + "m an Land übrig.");
+                System.err.println("Es bleiben auf der X Achse also am Nach der Aufteilung der Kleingärten " + String.format("%.20f", (((grundstückx / kleingartenLängex) - (int) (grundstückx / kleingartenLängex))*kleingartenLängex)) + "m an Land übrig.");
                 System.err.println("Dies ist auf die Kleingärten runtergerechnet eine Messungenauigkeit von : " + 
                 String.format("%.20f", 
                 ((((grundstückx / kleingartenLängex) - (int) (grundstückx / kleingartenLängex)) * kleingartenLängex) / 
@@ -120,7 +120,7 @@ public class QuadratischPraktischGruen {
             } 
             if ((grundstücky/kleingartenLängey) - (int) (grundstücky/kleingartenLängey) > 0){
                 System.err.println("Die Aufteilung der y Achse ist um " + String.format("%.20f", (((grundstücky / kleingartenLängey) - (int) (grundstücky / kleingartenLängey))*kleingartenLängey)) + "m ungenau.");
-                System.err.println("Es bleiben auf der Y Achse also am Nach der Aufteilung der Kleingährten " + String.format("%.20f", (((grundstücky / kleingartenLängey) - (int) (grundstücky / kleingartenLängey))*kleingartenLängex)) + "m an Land übrig.");
+                System.err.println("Es bleiben auf der Y Achse also am Nach der Aufteilung der Kleingärten " + String.format("%.20f", (((grundstücky / kleingartenLängey) - (int) (grundstücky / kleingartenLängey))*kleingartenLängex)) + "m an Land übrig.");
                 System.err.println("Dies ist auf die Kleingärten runtergerechnet eine Messungenauigkeit von : " + 
                 String.format("%.20f", 
                 ((((grundstücky / kleingartenLängey) - (int) (grundstücky / kleingartenLängey)) * kleingartenLängey) / 
