@@ -5,7 +5,7 @@ public class QuadratischPraktischGruen {
         int grundstücky;
         int grundstückx;
 
-        String file = "data\\garten5.txt";
+        String file = args[0];
         FileReaderx fileReaderx = new FileReaderx();
         
 
