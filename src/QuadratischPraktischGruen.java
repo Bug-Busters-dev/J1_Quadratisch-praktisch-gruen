@@ -20,7 +20,7 @@ public class QuadratischPraktischGruen {
         
         int sinfollsterKleinstegemeinsamerTeilerGrundstück = 0;
         
-        for(int i = 0; i < kleinstegemeinsameTeilerGrundstück.length; i++){
+        for(int i = (kleinstegemeinsameTeilerGrundstück.length-1); i > 0; i--){
             try {
                 if (anzahlInteresentenUpper - ((grundstückx/kleinstegemeinsameTeilerGrundstück[i])*(grundstücky/kleinstegemeinsameTeilerGrundstück[i])) < (anzahlInteresenten / 100.0f) * 10 || anzahlInteresentenUpper - ((grundstückx/kleinstegemeinsameTeilerGrundstück[i]+1)*(grundstücky/kleinstegemeinsameTeilerGrundstück[i]+1)) < 0){
                     sinfollsterKleinstegemeinsamerTeilerGrundstück = kleinstegemeinsameTeilerGrundstück[i];
@@ -28,6 +28,10 @@ public class QuadratischPraktischGruen {
             } catch (Exception e) {
                 sinfollsterKleinstegemeinsamerTeilerGrundstück = kleinstegemeinsameTeilerGrundstück[i];
             }
+        }
+
+        if (sinfollsterKleinstegemeinsamerTeilerGrundstück == 0){
+            sinfollsterKleinstegemeinsamerTeilerGrundstück = 1;
         }
 
         double kleingartenLängex = sinfollsterKleinstegemeinsamerTeilerGrundstück;
@@ -39,9 +43,9 @@ public class QuadratischPraktischGruen {
         System.out.println("grundstücky: " +grundstücky +"m");
         System.out.println("kleingartenLängex (vor der weiteren Anpassung): "+kleingartenLängex +"m");
         System.out.println("kleingartenLängey (vor der weiteren Anpassung): "+kleingartenLängey +"m");
-        System.out.println("Gärten (basierend auf den Längen vor der weiteren Anpassung): "+((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)));
-        System.out.println("Interesenten: "+anzahlInteresenten);
-        System.out.println("Interesenten_upper: "+anzahlInteresentenUpper);
+        System.out.println("Anzahl Gärten (basierend auf den Längen vor der weiteren Anpassung): "+((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)));
+        System.out.println("Interessenten: "+anzahlInteresenten);
+        System.out.println("Interessenten_upper: "+anzahlInteresentenUpper);
 
         System.out.println("--------------------------------------------------------------------------------------------------------------------");
 
@@ -91,10 +95,10 @@ public class QuadratischPraktischGruen {
             }
         }
 
-        System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +"m und eine Länge von " + kleingartenLängey + "m.");
-        System.out.println("Dies sorgt für eine Abweichung der Kanten vom perfekten Quadrat von: " + (kleingartenLängex - kleingartenLängey) + "m (" + abweichung(kleingartenLängex, kleingartenLängey) + " Prozent)");
+         System.out.println("Jeder Kleingarten hat eine Breite von " + kleingartenLängex +"m und eine Länge von " + kleingartenLängey + "m.");
+        System.out.println("Dies sorgt für eine Abweichung der Kanten vom perfekten Quadrat von " + (kleingartenLängex - kleingartenLängey) + "m (" + abweichung(kleingartenLängex, kleingartenLängey) + " Prozent).");
         System.out.println("Insgesamt gibt es " + Math.floor((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)) + " Kleingärten.");
-        System.out.println("Dies sind " + Math.floor((((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey))- anzahlInteresenten)) + " mehr als es Interessenten gibt.(" + String.format("%.5f", ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)/(anzahlInteresenten/100.0f))-100) + " Prozent)");
+        System.out.println("Dies sind " + Math.floor((((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey))- anzahlInteresenten)) + " mehr als es Interessenten gibt(" + String.format("%.5f", ((grundstückx/kleingartenLängex)*(grundstücky/kleingartenLängey)/(anzahlInteresenten/100.0f))-100) + " Prozent).");
         
         System.out.println("--------------------------------------------------------------------------------------------------------------------");
 
@@ -112,7 +116,7 @@ public class QuadratischPraktischGruen {
     private static void kontröler(int grundstückx, int grundstücky, double kleingartenLängex, double kleingartenLängey){ 
         	if ((grundstückx/kleingartenLängex) - (int) (grundstückx/kleingartenLängex) > 0){
                 System.err.println("Die Aufteilung der x Achse ist um " + String.format("%.20f", (((grundstückx / kleingartenLängex) - (int) (grundstückx / kleingartenLängex))*kleingartenLängex)) + "m ungenau.");
-                System.err.println("Es bleiben auf der X Achse also am Nach der Aufteilung der Kleingärten " + String.format("%.20f", (((grundstückx / kleingartenLängex) - (int) (grundstückx / kleingartenLängex))*kleingartenLängex)) + "m an Land übrig.");
+                System.err.println("Es bleiben auf der X Achse nach der Aufteilung der Kleingärten " + String.format("%.20f", (((grundstückx / kleingartenLängex) - (int) (grundstückx / kleingartenLängex))*kleingartenLängex)) + "m an Land übrig.");
                 System.err.println("Dies ist auf die Kleingärten runtergerechnet eine Messungenauigkeit von : " + 
                 String.format("%.20f", 
                 ((((grundstückx / kleingartenLängex) - (int) (grundstückx / kleingartenLängex)) * kleingartenLängex) / 
@@ -120,7 +124,7 @@ public class QuadratischPraktischGruen {
             } 
             if ((grundstücky/kleingartenLängey) - (int) (grundstücky/kleingartenLängey) > 0){
                 System.err.println("Die Aufteilung der y Achse ist um " + String.format("%.20f", (((grundstücky / kleingartenLängey) - (int) (grundstücky / kleingartenLängey))*kleingartenLängey)) + "m ungenau.");
-                System.err.println("Es bleiben auf der Y Achse also am Nach der Aufteilung der Kleingärten " + String.format("%.20f", (((grundstücky / kleingartenLängey) - (int) (grundstücky / kleingartenLängey))*kleingartenLängex)) + "m an Land übrig.");
+                System.err.println("Es bleiben auf der Y Achse nach der Aufteilung der Kleingärten " + String.format("%.20f", (((grundstücky / kleingartenLängey) - (int) (grundstücky / kleingartenLängey))*kleingartenLängex)) + "m an Land übrig.");
                 System.err.println("Dies ist auf die Kleingärten runtergerechnet eine Messungenauigkeit von : " + 
                 String.format("%.20f", 
                 ((((grundstücky / kleingartenLängey) - (int) (grundstücky / kleingartenLängey)) * kleingartenLängey) / 
